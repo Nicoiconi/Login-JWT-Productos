@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
       if (!verificarUsuario) {
         res.status(404).json({ error: "" });
       } else {
-        // validar token
+
         const decodedToken = jwt.verify(token, TOKEN_KEY);
 
         if (decodedToken.expiredAt) {
@@ -52,7 +52,6 @@ router.post("/", async (req, res) => {
           const existeUsuario = await esquemaUsuarios.findOne({ accNuevoUsuario });
           if (existeUsuario) {
             return res.status(409).json({ error: "Ya existe un usuario con esa acc." });
-            // 409 conflicto
           };
 
           const hashedPass = await hashData(pass);
@@ -64,7 +63,6 @@ router.post("/", async (req, res) => {
           });
 
           const nuevoUsuario = await esquemaUsuarios.findById(usuario._id);
-          // console.log(nuevoAnillo);
           res.status(200).json({ mensaje: 'Usuario creado exitosamente', objeto: nuevoUsuario });
         }
       }
@@ -84,26 +82,17 @@ router.get("/", async (req, res) => {
     } else {
 
       const verificarUsuario = await esquemaUsuarios.findOne({ acc, token });
-      // console.log(verificarUsuario);
 
       if (!verificarUsuario) {
         res.status(404).json({ error: "Usuario no autorizado" });
       } else {
-        // validar token
+
         const decodedToken = jwt.verify(token, TOKEN_KEY);
-        // console.log(decodedToken);
 
         if (decodedToken.expiredAt) {
           res.status(404).json({ error: "Usuario no autorizado" });
         } else {
 
-          // let consulta = {};
-
-          // if (acc) consulta.acc = acc;
-
-          // if (token) consulta.token = token;
-
-          // controlar que funcione correctamente. controlado? NO
           const todosUsuarios = await esquemaUsuarios.find();
           res.send(todosUsuarios);
         }
@@ -118,7 +107,6 @@ router.get("/", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { acc, pass } = req.body;
-    // console.log(req.body);
 
     if (!(acc && pass)) {
       res.status(400).send({ error: "Faltan datos mostro" });
@@ -153,7 +141,6 @@ router.post("/login", async (req, res) => {
           } else {
 
             const usuarioActualizado = await esquemaUsuarios.updateOne({ _id: usuario._id }, { $set: { token: nuevoToken } }, { upsert: true })
-            // console.log(usuarioActualizado);
 
             if (usuarioActualizado.nModified === 0) {
               res.status(404).send({ error: "error inesperado" });
@@ -183,14 +170,12 @@ router.post("/verificar-token", async (req, res) => {
       res.send(false);
     } else {
       const verificarUsuario = await esquemaUsuarios.findOne({ acc, token });
-      // console.log(verificarUsuario);
 
       if (!verificarUsuario) {
         res.send(false);
       } else {
-        // validar token
+
         const decodedToken = jwt.verify(token, TOKEN_KEY);
-        // console.log(decodedToken);
 
         if (decodedToken.expiredAt) {
           res.send(false);
@@ -200,7 +185,7 @@ router.post("/verificar-token", async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({ error: "Error al verificar el token" });
   }
 });
@@ -214,16 +199,13 @@ router.get("/:id", async (req, res) => {
       res.status(404).json({ error: "" });
     } else {
 
-
       const verificarUsuario = await esquemaUsuarios.findOne({ acc, token });
-      // console.log(verificarUsuario);
 
       if (!verificarUsuario) {
         res.status(404).json({ error: "" });
       } else {
-        // validar token
+
         const decodedToken = jwt.verify(token, TOKEN_KEY);
-        // console.log(decodedToken);
 
         if (decodedToken.expiredAt) {
           res.status(404).json({ error: "" });
@@ -244,71 +226,59 @@ router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { nombre, passActual, nuevaAcc, passNueva, acc, token } = req.body;
-    console.log(1, req.body);
 
     if (!(acc && token && passActual)) {
       res.status(404).json({ error: "Error al obtener los usuarios" });
     };
     const verificarUsuario = await esquemaUsuarios.findOne({ acc, token });
-    // console.log(verificarUsuario);
 
     if (!verificarUsuario) {
       res.status(404).json({ error: "Usuario no autorizado" });
     } else {
-      // validar token
+
       const decodedToken = jwt.verify(token, TOKEN_KEY);
-      // console.log(decodedToken);
 
       if (decodedToken.expiredAt) {
         res.status(404).json({ error: "Usuario no autorizado" });
-
       } else {
 
         const usuarioAModificar = await esquemaUsuarios.findById(id);
 
         const coincidePass = await verifyHashedData(passActual, usuarioAModificar.pass);
-        console.log(2, coincidePass);
-        
+
+
         if (!coincidePass) {
           res.status(404).send({ error: "credenciales no válidas" });
         } else {
 
           let updateFields = {};
-          console.log(3, updateFields);
 
           if (passNueva) {
             const hashedNuevaPass = await hashData(passNueva);
             updateFields.pass = hashedNuevaPass;
           };
-          console.log(3, passNueva);
+
 
           if (nuevaAcc) {
             const existeUsuario = await esquemaUsuarios.findOne({ acc: nuevaAcc });
-            console.log(3, existeUsuario);
             if (existeUsuario) {
               return res.status(409).json({ error: "Ya existe un usuario con esa acc." });
             };
             updateFields.acc = nuevaAcc;
-            console.log(3, updateFields);
-
           };
-          console.log(3, updateFields);
 
           if (nombre) {
             updateFields.nombre = nombre;
           };
 
-          updateFields.modified_at = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss - DD/MM/YYYY');;
-          console.log(3, updateFields);
+          updateFields.modified_at = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss - DD/MM/YYYY');
 
           const usuarioModificado = await esquemaUsuarios.updateOne({ _id: id }, { $set: updateFields });
-          console.log(4, usuarioModificado);
 
           if (usuarioModificado.nModified === 0) {
             res.status(404).send({ error: "No se pudo modificar el usuario" });
           } else {
             const usuarioActualizado = await esquemaUsuarios.findOne({ _id: id });
-            // console.log(usuarioActualizado);
             res.status(200).json({ mensaje: 'Usuario editado exitosamente', objeto: usuarioActualizado });
           };
         }
@@ -332,7 +302,6 @@ router.put("/logout/:id", async (req, res) => {
       res.status(500).json({ error: "Error al deslogearse" });
     } else {
       const usuarioADeslogear = await esquemaUsuarios.findOne({ acc, token });
-      // console.log(usuarioADeslogear);
 
       if (!usuarioADeslogear) {
         res.status(500).json({ error: "El usuario ya esta deslogeado" });
@@ -362,14 +331,12 @@ router.delete("/:id", async (req, res) => {
     };
 
     const verificarUsuario = await esquemaUsuarios.findOne({ acc, token });
-    // console.log(verificarUsuario);
 
     if (!verificarUsuario) {
       res.status(404).json({ error: "" });
     } else {
-      // validar token
+
       const decodedToken = jwt.verify(token, TOKEN_KEY);
-      // console.log(decodedToken);
 
       if (decodedToken.expiredAt) {
         res.status(404).json({ error: "" });

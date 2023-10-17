@@ -21,14 +21,12 @@ router.post("/", async (req, res) => {
     } else {
 
       const verificarUsuario = await esquemaUsuarios.findOne({ acc, token });
-      // console.log(verificarUsuario);
 
       if (!verificarUsuario) {
         res.status(404).json({ error: "" });
       } else {
-        // validar token
+  
         const decodedToken = jwt.verify(token, TOKEN_KEY);
-        // console.log(decodedToken);
 
         if (decodedToken.expiredAt) {
           res.status(404).json({ error: "" });
@@ -55,15 +53,12 @@ router.post("/", async (req, res) => {
             // 409 conflicto
           };
 
-
           const producto = await esquemaProductos.create({
             nombre,
             categoria: categoriaObjectId,
           });
-          console.log(producto);
 
           const nuevoProducto = await esquemaProductos.findById(producto._id);
-          console.log(nuevoProducto);
           res.status(200).json({ mensaje: 'Producto creado exitosamente', objeto: nuevoProducto });
         }
       }
@@ -76,7 +71,7 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    // const { nombre } = req.body;
+
     const { acc, token } = req.query;
 
     if (!(acc && token)) {
@@ -84,14 +79,12 @@ router.get("/", async (req, res) => {
     } else {
 
       const verificarUsuario = await esquemaUsuarios.findOne({ acc, token });
-      // console.log(verificarUsuario);
 
       if (!verificarUsuario) {
         res.status(404).json({ error: "" });
       } else {
         // validar token
         const decodedToken = jwt.verify(token, TOKEN_KEY);
-        // console.log(decodedToken);
 
         if (decodedToken.expiredAt) {
           res.status(404).json({ error: "" });
@@ -121,14 +114,12 @@ router.get("/:id", async (req, res) => {
     } else {
 
       const verificarUsuario = await esquemaUsuarios.findOne({ acc, token });
-      // console.log(verificarUsuario);
 
       if (!verificarUsuario) {
         res.status(404).json({ error: "" });
       } else {
-        // validar token
+
         const decodedToken = jwt.verify(token, TOKEN_KEY);
-        // console.log(decodedToken);
 
         if (decodedToken.expiredAt) {
           res.status(404).json({ error: "" });
@@ -143,7 +134,7 @@ router.get("/:id", async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({ error: "Error al obtener el producto" });
   }
 });
@@ -158,14 +149,12 @@ router.put("/:id", async (req, res) => {
     } else {
 
       const verificarUsuario = await esquemaUsuarios.findOne({ acc, token });
-      // console.log(verificarUsuario);
 
       if (!verificarUsuario) {
         res.status(404).json({ error: "" });
       } else {
-        // validar token
+
         const decodedToken = jwt.verify(token, TOKEN_KEY);
-        // console.log(decodedToken);
 
         if (decodedToken.expiredAt) {
           res.status(404).json({ error: "" });
@@ -180,7 +169,6 @@ router.put("/:id", async (req, res) => {
             const categoriaObjectId = mongoose.Types.ObjectId(categoria);
             updateFields.categoria = categoriaObjectId;
           };
-
 
           updateFields.modified_at = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss - DD/MM/YYYY');
 
@@ -211,14 +199,12 @@ router.delete("/:id", async (req, res) => {
     } else {
 
       const verificarUsuario = await esquemaUsuarios.findOne({ acc, token });
-      // console.log(verificarUsuario);
 
       if (!verificarUsuario) {
         res.status(404).json({ error: "" });
       } else {
-        // validar token
+
         const decodedToken = jwt.verify(token, TOKEN_KEY);
-        // console.log(decodedToken);
 
         if (decodedToken.expiredAt) {
           res.status(404).json({ error: "" });

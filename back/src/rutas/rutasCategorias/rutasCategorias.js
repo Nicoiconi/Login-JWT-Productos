@@ -71,14 +71,12 @@ router.get("/", async (req, res) => {
     } else {
 
       const verificarUsuario = await esquemaUsuarios.findOne({ acc, token });
-      // console.log(verificarUsuario);
 
       if (!verificarUsuario) {
         res.status(404).json({ error: "Usuario no autorizado" });
       } else {
-        // validar token
+
         const decodedToken = jwt.verify(token, TOKEN_KEY);
-        // console.log(decodedToken);
 
         if (decodedToken.expiredAt) {
           res.status(404).json({ error: "Usuario no autorizado" });
@@ -195,7 +193,7 @@ router.delete("/:id", async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({ error: "Error al eliminar la categroría" });
   }
 });
