@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { buscarUsuarioPorId } from "../../../../redux/actions/usuarioActions/usuarioActions";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { buscarCategoriaPorId } from "../../../../redux/actions/categoriasActions/categoriasActions";
 
@@ -11,7 +10,6 @@ export default function ListaCategorias() {
   const [credenciales, setCredenciales] = useState();
 
   const categorias = useSelector(state => state.categorias.todasCategorias);
-  console.log(categorias);
   const usuarioLogeado = useSelector(state => state.usuarios.usuarioLogeado);
 
   useEffect(() => {

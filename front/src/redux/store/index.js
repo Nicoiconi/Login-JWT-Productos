@@ -11,7 +11,6 @@ import {
   REGISTER,
 } from "redux-persist";
 
-
 import { usuariosSlice } from "../slices/usuariosSlice/usuariosSlice";
 import { categoriasSlice } from "../slices/categoriasSlice/categoriasSlice";
 import { productosSlice } from "../slices/productosSlice/productosSlice";

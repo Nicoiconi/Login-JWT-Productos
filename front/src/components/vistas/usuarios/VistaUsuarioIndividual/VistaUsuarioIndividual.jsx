@@ -1,25 +1,23 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { borrarUsuario, buscarUsuarioPorId, buscarUsuarios } from "../../../../redux/actions/usuarioActions/usuarioActions";
 import { setUsuarioPorId } from "../../../../redux/slices/usuariosSlice/usuariosSlice";
 import FormularioEditarUsuario from "../../../formularios/usuarios/FormularioEditarUsuario/FormularioEditarUsuario";
 
+
 export default function VistaUsuarioIndividual() {
 
   const dispatch = useDispatch();
 
   const { id } = useParams();
-  // console.log(id);
 
   const [credenciales, setCredenciales] = useState();
   const [switchHabilitarEdicion, setSwitchHabilitarEdicion] = useState(false);
   const [switchHabilitarEliminar, setSwitchHabilitarEliminar] = useState(false);
 
   const usuario = useSelector(state => state.usuarios.usuarioIndividual);
-  // console.log(usuario);
   const usuarioLogeado = useSelector(state => state.usuarios.usuarioLogeado);
-  // console.log(usuarioLogeado);
 
   useEffect(() => {
     setCredenciales({
@@ -27,7 +25,6 @@ export default function VistaUsuarioIndividual() {
       token: usuarioLogeado.token
     });
   }, []);
-  // console.log(credenciales);
 
   function switcharHabilitarEdicion() {
     setSwitchHabilitarEliminar(false);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { crearCategoria } from "../../../../redux/actions/categoriasActions/categoriasActions";
@@ -10,7 +10,6 @@ export default function FormularioNuevaCategoria() {
   const [nuevaCategoria, setNuevaCategoria] = useState();
 
   const usuarioLogeado = useSelector(state => state.usuarios.usuarioLogeado);
-  // console.log(usuarioLogeado);
 
   useEffect(() => {
     setNuevaCategoria({
@@ -19,7 +18,6 @@ export default function FormularioNuevaCategoria() {
       token: usuarioLogeado?.token
     });
   }, [usuarioLogeado]);
-  // console.log(nuevaCategoria);
 
   function handlerDatosNuevaCategoria(e) {
     const { name, value } = e.target;
@@ -29,7 +27,6 @@ export default function FormularioNuevaCategoria() {
       [name]: value
     });
   };
-  console.log(nuevaCategoria);
 
   function handleSubmit(e) {
     // e.preventDefault();

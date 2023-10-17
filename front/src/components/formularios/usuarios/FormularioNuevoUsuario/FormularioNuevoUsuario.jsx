@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { crearUsuario } from "../../../../redux/actions/usuarioActions/usuarioActions";
 
 export default function FormularioNuevoUsuario(props) {
@@ -10,7 +9,6 @@ export default function FormularioNuevoUsuario(props) {
   const [nuevoUsuario, setNuevoUsuario] = useState();
 
   const usuarioLogeado = useSelector(state => state.usuarios.usuarioLogeado);
-  // console.log(usuarioLogeado);
 
   useEffect(() => {
     setNuevoUsuario({
@@ -19,7 +17,6 @@ export default function FormularioNuevoUsuario(props) {
       token: usuarioLogeado?.token
     });
   }, [usuarioLogeado]);
-  // console.log(nuevoUsuario);
 
   function handlerCredenciales(e) {
     const { name, value } = e.target;
@@ -29,7 +26,6 @@ export default function FormularioNuevoUsuario(props) {
       [name]: value
     });
   };
-  console.log(nuevoUsuario);
 
   function handleSubmit(e) {
     // e.preventDefault();

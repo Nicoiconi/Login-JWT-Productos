@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-
 import { buscarProductoPorId } from "../../../../redux/actions/productosActions/productosActions";
 
 export default function ListaProductos() {
@@ -11,7 +10,6 @@ export default function ListaProductos() {
   const [credenciales, setCredenciales] = useState();
 
   const productos = useSelector(state => state.productos?.todosProductos);
-  console.log(productos);
   const usuarioLogeado = useSelector(state => state.usuarios.usuarioLogeado);
 
   useEffect(() => {

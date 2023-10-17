@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-
 import ListaProductos from "../../../contenedores/listas/ListaProductos/ListaProductos";
 import { buscarProductos } from "../../../../redux/actions/productosActions/productosActions";
 
@@ -12,7 +11,6 @@ export default function VistaTodosProductos() {
   const [credenciales, setCredenciales] = useState();
 
   const usuarioLogeado = useSelector(state => state.usuarios.usuarioLogeado);
-  // console.log(usuarioLogeado);
 
   useEffect(() => {
     setCredenciales({
@@ -21,7 +19,6 @@ export default function VistaTodosProductos() {
       token: usuarioLogeado?.token
     });
   }, []);
-  // console.log(credenciales);
 
   function handlerBuscarReferidos() {
     dispatch(buscarProductos(credenciales));

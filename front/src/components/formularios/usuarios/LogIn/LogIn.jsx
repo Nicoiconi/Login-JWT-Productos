@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logearUsuario } from "../../../../redux/actions/usuarioActions/usuarioActions";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
-
 
 
 export default function LogIn() {
@@ -19,7 +17,6 @@ export default function LogIn() {
       [name]: value
     });
   };
-  // console.log(credencialesUsuario);
 
   function handlerBotonLogIn() {
     dispatch(logearUsuario(credencialesUsuario));

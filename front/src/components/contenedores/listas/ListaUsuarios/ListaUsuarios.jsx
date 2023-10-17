@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { buscarUsuarioPorId } from "../../../../redux/actions/usuarioActions/usuarioActions";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
@@ -10,7 +10,6 @@ export default function ListaUsuarios() {
   const [credenciales, setCredenciales] = useState();
 
   const usuarios = useSelector(state => state.usuarios.todosUsuarios);
-  console.log(usuarios);
   const usuarioLogeado = useSelector(state => state.usuarios.usuarioLogeado);
 
   useEffect(() => {

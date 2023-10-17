@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-// import { Link } from "react-router-dom/cjs/react-router-dom.min";
-
 import { deslogearUsuario } from "../../../redux/actions/usuarioActions/usuarioActions";
 import { setResetearEstadoUsuarios } from "../../../redux/slices/usuariosSlice/usuariosSlice";
-
 
 
 export default function BarraLogIn() {
@@ -13,7 +10,6 @@ export default function BarraLogIn() {
   const dispatch = useDispatch();
 
   const usuarioLogeado = useSelector(state => state.usuarios.usuarioLogeado);
-  // console.log(usuarioLogeado);
 
   const [switchHabilitarLogOut, setSwitchHabilitarLogOut] = useState(false);
 
@@ -26,7 +22,6 @@ export default function BarraLogIn() {
     dispatch(deslogearUsuario(usuarioLogeado));
     dispatch(setResetearEstadoUsuarios());
   };
-
 
   return (
     <div class="container-fluid">

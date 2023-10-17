@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-
 import "./App.css";
 import verificarToken from '../../utils/verificarToken';
 import Inicio from '../vistas/Inicio/Inicio';
@@ -23,7 +22,6 @@ function App() {
   const [tokenVerificado, setTokenVerificado] = useState();
 
   const usuarioLogeado = useSelector(state => state.usuarios.usuarioLogeado);
-  // console.log(usuarioLogeado);
 
   useEffect(() => {
     async function verificarUsuario() {
@@ -33,13 +31,13 @@ function App() {
 
         if (tokenVerificado === true) {
           setTokenVerificado(true);
-          console.log("todo piola");
+          console.log("Token verificado correctamente");
         } else {
           setTokenVerificado(false);
-          console.log("no ta piola")
+          console.log("Token inválido")
         }
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
     verificarUsuario();

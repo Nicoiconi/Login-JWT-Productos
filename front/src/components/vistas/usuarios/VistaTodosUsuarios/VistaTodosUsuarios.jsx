@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { buscarUsuarios } from "../../../../redux/actions/usuarioActions/usuarioActions";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
@@ -11,7 +11,6 @@ export default function VistaTodosUsuarios() {
   const [credenciales, setCredenciales] = useState();
 
   const usuarioLogeado = useSelector(state => state.usuarios.usuarioLogeado);
-  // console.log(usuarioLogeado);
 
   useEffect(() => {
     setCredenciales({
@@ -20,11 +19,9 @@ export default function VistaTodosUsuarios() {
       token: usuarioLogeado?.token
     });
   }, []);
-  // console.log(credenciales);
 
   function handlerBuscarReferidos() {
     dispatch(buscarUsuarios(credenciales));
-    // dispatch(buscarUsuarios());
   };
 
   return (

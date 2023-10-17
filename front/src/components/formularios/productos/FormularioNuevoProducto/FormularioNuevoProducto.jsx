@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import { buscarCategorias, crearCategoria } from "../../../../redux/actions/categoriasActions/categoriasActions";
+import { buscarCategorias } from "../../../../redux/actions/categoriasActions/categoriasActions";
 import { crearProducto } from "../../../../redux/actions/productosActions/productosActions";
 
 export default function FormularioNuevoProducto() {
@@ -12,7 +11,6 @@ export default function FormularioNuevoProducto() {
   const [credenciales, setCredenciales] = useState();
 
   const usuarioLogeado = useSelector(state => state.usuarios.usuarioLogeado);
-  // console.log(usuarioLogeado);
   const categorias = useSelector(state => state.categorias.todasCategorias);
 
   useEffect(() => {
@@ -22,7 +20,6 @@ export default function FormularioNuevoProducto() {
       token: usuarioLogeado?.token
     });
   }, [usuarioLogeado]);
-  // console.log(nuevoProducto);
 
   useEffect(() => {
     setCredenciales({
@@ -39,7 +36,6 @@ export default function FormularioNuevoProducto() {
       [name]: value
     });
   };
-  // console.log(nuevoProducto);
 
   function handleBuscarCategorias() {
     dispatch(buscarCategorias(credenciales));

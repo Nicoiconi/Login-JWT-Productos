@@ -9,14 +9,12 @@ export default function FormularioEditarCategoria(props) {
   const { setSwitchHabilitarEdicion } = props;
 
   const { id } = useParams();
-  // console.log(id);
 
   const dispatch = useDispatch();
 
   const [categoriaEditada, setCategoriaEditada] = useState();
 
   const usuarioLogeado = useSelector(state => state.usuarios.usuarioLogeado);
-  // console.log(usuarioLogeado);
 
   useEffect(() => {
     setCategoriaEditada({
@@ -33,7 +31,6 @@ export default function FormularioEditarCategoria(props) {
       [name]: value
     });
   };
-  console.log(categoriaEditada);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -44,7 +41,6 @@ export default function FormularioEditarCategoria(props) {
   return (
     <div class="container-fluid text-center d-flex align-item-center justify-content-center">
       <form onSubmit={(e) => handleSubmit(e)}>
-        {/* <div class="row"> */}
 
         <div class="row">
           {

@@ -1,6 +1,6 @@
-import React from "react";
-import FormularioNuevoUsuario from "../../../formularios/usuarios/FormularioNuevoUsuario/FormularioNuevoUsuario";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import FormularioNuevoUsuario from "../../../formularios/usuarios/FormularioNuevoUsuario/FormularioNuevoUsuario";
+
 
 export default function VistaNuevoUsuario() {
 

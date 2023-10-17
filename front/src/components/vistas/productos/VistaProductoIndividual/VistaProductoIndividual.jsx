@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom/cjs/react-router-dom.min";
-
 import FormularioEditarProducto from "../../../formularios/productos/FormularioEditarProducto/FormularioEditarProducto";
 import { borrarProducto, buscarProductoPorId, buscarProductos } from "../../../../redux/actions/productosActions/productosActions";
 import { setProductoPorId } from "../../../../redux/slices/productosSlice/productosSlice";
@@ -11,16 +10,13 @@ export default function VistaProductoIndividual() {
   const dispatch = useDispatch();
 
   const { id } = useParams();
-  // console.log(id);
 
   const [credenciales, setCredenciales] = useState();
   const [switchHabilitarEdicion, setSwitchHabilitarEdicion] = useState(false);
   const [switchHabilitarEliminar, setSwitchHabilitarEliminar] = useState(false);
 
   const producto = useSelector(state => state.productos.productoIndividual);
-  console.log(producto);
   const usuarioLogeado = useSelector(state => state.usuarios.usuarioLogeado);
-  // console.log(usuarioLogeado);
 
   useEffect(() => {
     setCredenciales({
@@ -28,7 +24,6 @@ export default function VistaProductoIndividual() {
       token: usuarioLogeado.token
     });
   }, []);
-  // console.log(credenciales);
 
   function switcharHabilitarEdicion() {
     setSwitchHabilitarEliminar(false);

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-
 import { editarUsuario } from "../../../../redux/actions/usuarioActions/usuarioActions";
 import { buscarCategorias } from "../../../../redux/actions/categoriasActions/categoriasActions";
 
@@ -10,7 +9,6 @@ export default function FormularioEditarUsuario(props) {
   const { setSwitchHabilitarEdicion } = props;
 
   const { id } = useParams();
-  // console.log(id);
 
   const dispatch = useDispatch();
 
@@ -18,7 +16,6 @@ export default function FormularioEditarUsuario(props) {
   const [credenciales, setCredenciales] = useState();
 
   const usuarioLogeado = useSelector(state => state.usuarios.usuarioLogeado);
-  // console.log(usuarioLogeado);
   const categorias = useSelector(state => state.categorias.todasCategorias);
 
   useEffect(() => {
@@ -43,7 +40,6 @@ export default function FormularioEditarUsuario(props) {
       [name]: value
     });
   };
-  console.log(usuarioEditado);
 
   function handleBuscarCategorias() {
     dispatch(buscarCategorias(credenciales));

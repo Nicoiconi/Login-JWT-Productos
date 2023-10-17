@@ -71,8 +71,6 @@ export function logearUsuario(credenciales) {
 export async function verificarTokenUsuario(usuario) {
   try {
     const tokenVerificado = await axios.post(`http://localhost:27017/usuarios/verificar-token`, usuario);
-    // console.log(tokenVerificado.data);
-
     return tokenVerificado.data;
   } catch (error) {
     // console.log(error);

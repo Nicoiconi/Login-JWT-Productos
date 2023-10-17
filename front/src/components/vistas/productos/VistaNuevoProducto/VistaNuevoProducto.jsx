@@ -1,7 +1,4 @@
-import React from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-
-import FormularioNuevaCategoria from "../../../formularios/categorias/FormularioNuevaCategoria/FormularioNuevaCategoria";
 import FormularioNuevoProducto from "../../../formularios/productos/FormularioNuevoProducto/FormularioNuevoProducto";
 
 export default function VistaNuevoProducto() {

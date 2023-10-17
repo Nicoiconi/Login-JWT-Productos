@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-
-import ListaUsuarios from "../../../contenedores/listas/ListaUsuarios/ListaUsuarios";
 import { buscarCategorias } from "../../../../redux/actions/categoriasActions/categoriasActions";
 import ListaCategorias from "../../../contenedores/listas/ListasCategorias/ListasCategorias";
 
@@ -13,7 +11,6 @@ export default function VistaTodasCategorias() {
   const [credenciales, setCredenciales] = useState();
 
   const usuarioLogeado = useSelector(state => state.usuarios.usuarioLogeado);
-  // console.log(usuarioLogeado);
 
   useEffect(() => {
     setCredenciales({
@@ -22,7 +19,6 @@ export default function VistaTodasCategorias() {
       token: usuarioLogeado?.token
     });
   }, []);
-  // console.log(credenciales);
 
   function handlerBuscarReferidos() {
     dispatch(buscarCategorias(credenciales));

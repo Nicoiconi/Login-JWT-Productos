@@ -8,10 +8,8 @@ import { editarProducto } from "../../../../redux/actions/productosActions/produ
 export default function FormularioEditarProducto(props) {
 
   const { setSwitchHabilitarEdicion, idCategoria } = props;
-  console.log(idCategoria);
 
   const { id } = useParams();
-  // console.log(id);
 
   const dispatch = useDispatch();
 
@@ -20,7 +18,6 @@ export default function FormularioEditarProducto(props) {
   const [categoriasAMostrar, setCategoriasAMostrar] = useState();
 
   const usuarioLogeado = useSelector(state => state.usuarios.usuarioLogeado);
-  // console.log(usuarioLogeado);
   const categorias = useSelector(state => state.categorias.todasCategorias);
 
   useEffect(() => {
@@ -34,7 +31,6 @@ export default function FormularioEditarProducto(props) {
       categorias?.filter(c => c._id.toString() !== idCategoria.toString())
     );
   }, []);
-  console.log(categoriasAMostrar);
 
   useEffect(() => {
     setCredenciales({
@@ -50,7 +46,6 @@ export default function FormularioEditarProducto(props) {
       [name]: value
     });
   };
-  console.log(productoEditado);
 
   function handleBuscarCategorias(e) {
     e.preventDefault();
@@ -66,7 +61,6 @@ export default function FormularioEditarProducto(props) {
   return (
     <div class="container-fluid text-center d-flex align-item-center justify-content-center">
       <form onSubmit={(e) => handleSubmit(e)}>
-        {/* <div class="row"> */}
 
         <div class="row">
           {
